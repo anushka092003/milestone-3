@@ -1,21 +1,41 @@
-
-def assemble_genome2(dna_list):
-  n = len(dna_list)
-  overlaps = [[0 for _ in range(n)] for _ in range(n)]
-  for i in range(n):
-    for j in range(n):
-      if i == j:
-        continue
-      x, y = dna_list[i], dna_list[j]
-      #size = len(x)
-      for k in range(1, len(x)):
-        if y.startswith(x[k:]): #checking if string 
-          overlaps[i][j] = len(x) - k
-          break
+ef assemble_genome2(dna_list):
+    dic={}
+    for i in range(len(dna_list)):
+        for j in range(len(dna_list)):
+            if i!=j:
+                ol=0
+                for k in range(9):
+                    if dna_list[j][:8]==dna_list[i][-8:]:
+                        ol=k
+                dic[(i,j)]=ol
+    if max(dic.values())>0:
+        ret="".join(dna_list)
+        l=len(ret)
+        stack=[]
+        for i,wd in enumerate(dna_list):
+            tmp=set(range(len(dna_list)))
+            tmp.remove(i)
+            stack.append((wd,i,tmp))
+        while stack:
+            ans,cur,remain=stack.pop()
+            if len(ans)<l:
+                if not remain:
+                    ret=ans
+                    l=len(ans)
+                else:
+                    tmp=[[dic[cur,idx],idx] for idx in remain] # [#overlap,idx]
+                    tmp.sort()
+                    for ol,idx in tmp:
+                        nans=ans+dna_list[idx][ol:]
+                        nremain=set(remain)
+                        nremain.remove(idx)
+                        stack.append((nans,idx,nremain))
+        return ret
           
-def load_file(name):
-  my_file = open(name, "r")
-  dna = my_file.read()
-  print(dna)
+def load_file(file):
+    with open(file, "r") as infile:
+        data = infile.read()
+    dna_list = data.splitlines()
+    return dna_list
         
   assemble_genome2(load_file('ms3-dna-mammuthus.txt'))
