@@ -37,5 +37,5 @@ def load_file(file):
         data = infile.read()
     dna_list = data.splitlines()
     return dna_list
-        
-  assemble_genome2(load_file('ms3-dna-mammuthus.txt'))
+
+assemble_genome2(load_file('ms3-dna-100.txt'))
