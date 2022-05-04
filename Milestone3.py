@@ -13,4 +13,9 @@ def assemble_genome2(dna_list):
           overlaps[i][j] = len(x) - k
           break
           
-assemble_genome2(load_file('ms3-dna-mammuthus.txt'))
+def load_file(name):
+  my_file = open(name, "r")
+  DNA = my_file.read()
+  print(DNA)
+        
+  assemble_genome2(load_file('ms3-dna-mammuthus.txt'))
