@@ -15,7 +15,7 @@ def assemble_genome2(dna_list):
           
 def load_file(name):
   my_file = open(name, "r")
-  DNA = my_file.read()
-  print(DNA)
+  dna = my_file.read()
+  print(dna)
         
   assemble_genome2(load_file('ms3-dna-mammuthus.txt'))
