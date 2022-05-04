@@ -1,4 +1,4 @@
-ef assemble_genome2(dna_list):
+def assemble_genome2(dna_list):
     dic={}
     for i in range(len(dna_list)):
         for j in range(len(dna_list)):
