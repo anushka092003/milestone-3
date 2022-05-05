@@ -1,40 +1,42 @@
 def assemble_genome2(dna_list):
-    dic={}
+    file = {}
     for i in range(len(dna_list)):
         for j in range(len(dna_list)):
-            if i!=j:
-                ol=0
+            if i != j:
+                y = 0
                 for k in range(9):
-                    if dna_list[j][:8]==dna_list[i][-8:]:
-                        ol=k
-                dic[(i,j)]=ol
-    if max(dic.values())>0:
-        ret="".join(dna_list)
-        l=len(ret)
-        stack=[]
-        for i,wd in enumerate(dna_list):
-            tmp=set(range(len(dna_list)))
-            tmp.remove(i)
-            stack.append((wd,i,tmp))
-        while stack:
-            ans,cur,remain=stack.pop()
+                    if dna_list[j][:8] == dna_list[i][-8:]:
+                        y = k
+                file[(i,j)] = y
+    if max(file.values())>0:
+        result = "".join(dna_list)
+        l = len(result)
+        string = []
+        for i,b in enumerate(dna_list):
+            temp = set(range(len(dna_list)))
+            temp.remove(i)
+            string.append((b,i,temp))
+        while string:
+            ans,c,remain = string.pop()
             if len(ans)<l:
                 if not remain:
-                    ret=ans
-                    l=len(ans)
+                    result = ans
+                    l = len(ans)
                 else:
-                    tmp=[[dic[cur,idx],idx] for idx in remain] # [#overlap,idx]
-                    tmp.sort()
-                    for ol,idx in tmp:
-                        nans=ans+dna_list[idx][ol:]
-                        nremain=set(remain)
-                        nremain.remove(idx)
-                        stack.append((nans,idx,nremain))
-        return ret
+                    temp = [[file[c,d],d] for d in remain]
+                    temp.sort()
+                    for y,d in temp:
+                        nans = ans + dna_list[d][y:]
+                        nremain = set(remain)
+                        nremain.remove(d)
+                        string.append((nans,d,nremain))
+        return result
  
-def load_file(file):
-    with open(file, "r") as infile:
-        data = infile.read()
+  
+ 
+def load_file(filename):
+    with open(filename, "r") as file:
+        data = file.read()
         dna_list = data.splitlines()
         return dna_list
 
