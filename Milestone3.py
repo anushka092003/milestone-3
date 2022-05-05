@@ -1,41 +1,37 @@
 def assemble_genome2(dna_list):
-    dic={}
+    dict = {}
     for i in range(len(dna_list)):
         for j in range(len(dna_list)):
-            if i!=j:
-                ol=0
-                for k in range(9):
+            if i != j:
+                y = 0
+                for k in range(8):
                     if dna_list[j][:8]==dna_list[i][-8:]:
-                        ol=k
-                dic[(i,j)]=ol
-    if max(dic.values())>0:
-        ret="".join(dna_list)
-        l=len(ret)
-        stack=[]
-        for i,wd in enumerate(dna_list):
-            tmp=set(range(len(dna_list)))
-            tmp.remove(i)
-            stack.append((wd,i,tmp))
-        while stack:
-            ans,cur,remain=stack.pop()
+                        y = k
+                dict[(i,j)] = y
+    if max(dict.values()) > 0 :
+        ret = "".join(dna_list)
+        l =len(ret)
+        string = []
+        while string:
+            ans,cur,remain=string.pop()
             if len(ans)<l:
                 if not remain:
-                    ret=ans
+                    ret = ans
                     l=len(ans)
                 else:
-                    tmp=[[dic[cur,idx],idx] for idx in remain] # [#overlap,idx]
+                    tmp=[[dict[cur,idx],idx] for idx in remain]
                     tmp.sort()
-                    for ol,idx in tmp:
-                        nans=ans+dna_list[idx][ol:]
+                    for y,idx in tmp:
+                        nans = ans+dna_list[idx][y:]
                         nremain=set(remain)
                         nremain.remove(idx)
-                        stack.append((nans,idx,nremain))
+                        string.append((nans,idx,nremain))
         return ret
-          
+ 
 def load_file(file):
     with open(file, "r") as infile:
         data = infile.read()
-    dna_list = data.splitlines()
-    return dna_list
+        dna_list = data.splitlines()
+        return dna_list
 
-assemble_genome2(load_file('ms3-dna-100.txt'))
+assemble_genome2(load_file('ms3-dna-50.txt'))
