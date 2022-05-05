@@ -3,11 +3,11 @@ def assemble_genome2(dna_list):
     for i in range(len(dna_list)):
         for j in range(len(dna_list)):
             if i!=j:
-                y=0
-                for k in range(8):
+                ol=0
+                for k in range(9):
                     if dna_list[j][:8]==dna_list[i][-8:]:
-                        y=k
-                dic[(i,j)]=y
+                        ol=k
+                dic[(i,j)]=ol
     if max(dic.values())>0:
         ret="".join(dna_list)
         l=len(ret)
@@ -25,8 +25,8 @@ def assemble_genome2(dna_list):
                 else:
                     tmp=[[dic[cur,idx],idx] for idx in remain] # [#overlap,idx]
                     tmp.sort()
-                    for y,idx in tmp:
-                        nans=ans+dna_list[idx][y:]
+                    for ol,idx in tmp:
+                        nans=ans+dna_list[idx][ol:]
                         nremain=set(remain)
                         nremain.remove(idx)
                         stack.append((nans,idx,nremain))
