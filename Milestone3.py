@@ -29,7 +29,7 @@ def assemble_genome2(dna_list):
                         ans = ans + dna_list[d][y:]
                         remain = set(remain)
                         remain.remove(d)
-                        string.append((nans,d,remain))
+                        string.append((ans,d,remain))
         return result
  
   
