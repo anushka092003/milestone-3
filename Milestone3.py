@@ -26,10 +26,10 @@ def assemble_genome2(dna_list):
                     temp = [[file[c,d],d] for d in remain]
                     temp.sort()
                     for y,d in temp:
-                        nans = ans + dna_list[d][y:]
-                        nremain = set(remain)
-                        nremain.remove(d)
-                        string.append((nans,d,nremain))
+                        ans = ans + dna_list[d][y:]
+                        remain = set(remain)
+                        remain.remove(d)
+                        string.append((nans,d,remain))
         return result
  
   
